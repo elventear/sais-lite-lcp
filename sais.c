@@ -467,7 +467,7 @@ static void induceSAandLCP(const void *T, sais_index_type *SA,
     }
     // update MinStack:
     assert(lcp >= 0); // LCP must already have been computed
-    while (lcp <= MinStack[stack_end]) stack_end -= 2; // pop from stack
+    while ((lcp <= MinStack[stack_end]) && (stack_end >= 0))  stack_end -= 2; // pop from stack
     MinStack[++stack_end] = i;   // push position on stack
     MinStack[++stack_end] = lcp; // push lcp-value
 
