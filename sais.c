@@ -338,6 +338,9 @@ static void induceSAandLCP(const void *T, sais_index_type *SA,
   SA[bb++] = (chr(j - 1) < c1) ? ~j : j; // put last character $ into its bucket
                         // negative values mean "don't induce from here anymore"
 
+  // in case LCP[0], which is always 0, hadn't been set yet
+  LCP[0] = 0;
+
   // Variant 3: stack
   sais_index_type sigma = 0;       // (true) alphabet size
   sais_index_type *TranslateSigma; // general to effective alphabet ([0..k-1] |--> [0..sigma-1])
@@ -464,9 +467,6 @@ static void induceSAandLCP(const void *T, sais_index_type *SA,
       LastOcc[TranslateSigma[c0]] = i;         // store origin of last occurrence of c0
     } else { // don't induce
       SA[i] = ~j;
-    }
-    if(0 == i) {
-      lcp = LCP[0] = 0;
     }
     // update MinStack:
     assert(lcp >= 0); // LCP must already have been computed
