@@ -465,6 +465,9 @@ static void induceSAandLCP(const void *T, sais_index_type *SA,
     } else { // don't induce
       SA[i] = ~j;
     }
+    if(0 == i) {
+      lcp = LCP[0] = 0;
+    }
     // update MinStack:
     assert(lcp >= 0); // LCP must already have been computed
     while ((lcp <= MinStack[stack_end]) && (stack_end >= 0))  stack_end -= 2; // pop from stack
