@@ -338,6 +338,9 @@ static void induceSAandLCP(const void *T, sais_index_type *SA,
   SA[bb++] = (chr(j - 1) < c1) ? ~j : j; // put last character $ into its bucket
                         // negative values mean "don't induce from here anymore"
 
+  // in case LCP[0], which is always 0, hadn't been set yet
+  LCP[0] = 0;
+
   // Variant 3: stack
   sais_index_type sigma = 0;       // (true) alphabet size
   sais_index_type *TranslateSigma; // general to effective alphabet ([0..k-1] |--> [0..sigma-1])
@@ -788,7 +791,7 @@ static sais_index_type sais_main(const void *T, sais_index_type *SA,
 	  if(--i < 0) break;
 	  newfs = LCP[i]; p = SA[i];
 	} while((c1 = chr(p)) == c0);
-	assert(LCP[j]==0); // first S*-suffix in bucket must have LCP-value 0
+	//assert(LCP[j]==0); // first S*-suffix in bucket must have LCP-value 0
 	LCP[j] = -1;       // mark first S*-suffix in every bucket
       } while(0 <= i);
       while(0 < j) {
