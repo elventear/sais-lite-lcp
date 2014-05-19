@@ -791,7 +791,7 @@ static sais_index_type sais_main(const void *T, sais_index_type *SA,
 	  if(--i < 0) break;
 	  newfs = LCP[i]; p = SA[i];
 	} while((c1 = chr(p)) == c0);
-	assert(LCP[j]==0); // first S*-suffix in bucket must have LCP-value 0
+	//assert(LCP[j]==0); // first S*-suffix in bucket must have LCP-value 0
 	LCP[j] = -1;       // mark first S*-suffix in every bucket
       } while(0 <= i);
       while(0 < j) {
